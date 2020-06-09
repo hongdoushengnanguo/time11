@@ -134,11 +134,12 @@ public class TaskController {
     public request  gragphs( HttpServletRequest re){
         request request=new request();
         HashMap<String,Object> map1 =new HashMap<>();
-
-
-        map1.put("pie",taskNewsService.selectPie(re.getSession().getAttribute("userName").toString()));
-        map1.put("col",taskNewsService.selectCol(re.getSession().getAttribute("userName").toString()));
-
+        HashMap<String,Object> map2 =new HashMap<>();
+        map2.put("series",taskNewsService.selectPie(re.getSession().getAttribute("userName").toString()));
+        map1.put("Pie",map2);
+        HashMap<String,Object> map3 =new HashMap<>();
+        map3.put("series",taskNewsService.selectCol(re.getSession().getAttribute("userName").toString()));
+        map1.put("Column",map3);
         request.setMsg("成功");
         request.setCode("1");
         request.setMap(map1);

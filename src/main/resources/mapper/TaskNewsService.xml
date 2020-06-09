@@ -9,14 +9,14 @@
 	</select>
 
 	<select id="selectPie" parameterType="String" resultType="java.util.HashMap">
-		select task_name , timezong as time from (
+		select task_name , timezong as data from (
 	select *,sum(time) timezong from (select * from record where to_days(great_time) = to_days(now())) c group by task_name
 
 	)b
 	where user_name= #{userName}
 	</select>
 	<select id="selectCol" parameterType="String" resultType="java.util.HashMap">
-		select task_name , timezong as time from (
+		select task_name , timezong as data from (
 		select *,sum(time) timezong from (select * from record where TO_DAYS(now()) - TO_DAYS(great_time)  &lt;=7 ) c group by task_name
 
 		)b
