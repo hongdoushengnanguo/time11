@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.time.time.mapper.TaskNewsMapper">
+
+	<!-- 批量更新状态 -->
+	<select id="selectTaskNews" parameterType="String" resultType="com.time.time.model.Record">
+		select * from record where task_name = #{taskName} and user_name = #{userName}
+	</select>
+
+	<select id="selectPie" parameterType="String" resultType="java.util.HashMap">
+		select task_name , timezong as time from (
+	select *,sum(time) timezong from (select * from record where to_days(great_time) = to_days(now())) c group by task_name
+
+	)b
+	where user_name= #{userName}
+	</select>
+	<select id="selectCol" parameterType="String" resultType="java.util.HashMap">
+		select task_name , timezong as time from (
+		select *,sum(time) timezong from (select * from record where TO_DAYS(now()) - TO_DAYS(great_time)  &lt;=7 ) c group by task_name
+
+		)b
+		where user_name= #{userName}
+		order by time DESC
+		limit 0,10
+	</select>
+
+</mapper>

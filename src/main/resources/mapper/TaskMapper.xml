@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.time.time.mapper.TaskMapper">
+
+	<!-- 批量更新状态 -->
+	<select id="queryNews" parameterType="String" resultType="com.time.time.model.Task">
+		select * from task where username = #{userName}
+	</select>
+    <select id="isHaveSameTask" parameterType="String" resultType="com.time.time.model.Task">
+		select * from task where taskname = #{taskName} and username = #{userName}
+	</select>
+
+</mapper>
